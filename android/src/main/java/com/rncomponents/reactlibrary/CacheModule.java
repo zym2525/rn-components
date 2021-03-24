@@ -26,7 +26,7 @@ public class CacheModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "RCTHttpCache";
+        return "RCTCache";
     }
 
 

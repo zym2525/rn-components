@@ -11,8 +11,8 @@ export enum RefreshEventType {
     OnStateChanged = 1,
     OnRefresh,
     OnLoadMore,
-    onFooterMoving,
-    onHeaderMoving,
+    OnFooterMoving,
+    OnHeaderMoving,
 }
 
 
@@ -74,10 +74,10 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
             case RefreshEventType.OnLoadMore:
                 this._handleOnLoadMore();
                 break;
-            case RefreshEventType.onFooterMoving:
+            case RefreshEventType.OnFooterMoving:
                 this._handeOnFooterMoving(event.nativeEvent.event);
                 break;
-            case RefreshEventType.onHeaderMoving:
+            case RefreshEventType.OnHeaderMoving:
                 this._handeOnHeaderMoving(event.nativeEvent.event);
                 break;
             default:
