@@ -10,7 +10,7 @@ export enum TwoLevelHeaderEventType {
     OnTwoLevel = 8
 }
 
-interface TwoLevelHeaderNativeEvent extends BaseNativeEvent { }
+export interface TwoLevelHeaderNativeEvent extends BaseNativeEvent { }
 
 class TwoLevelHeader extends Component<TwoLevelHeaderProps> {
 
