@@ -1,13 +1,73 @@
 import {
-  Alert,
-  DeviceEventEmitter,
   NativeEventEmitter,
   NativeAppEventEmitter,
   NativeModules,
   Platform
 } from "react-native";
 // import Config from '../../../baseConfig'
-const Config = {
+
+type Configuration = {
+  timeoutIntervalForRequest: number
+  maxRetryCount: number,
+  timeoutIntervalForResource?: number,
+}
+
+type AsyncUploadRes = 'UploadSuccess' | "UploadFail";
+
+type RNAliyunOSSType = {
+  initWithPlainTextAccessKey(accessKeyId: string, accessKeySecret: string, endPoint: string, configuration: Configuration): void
+  initWithImplementedSigner(signature: string, accessKey: string, endPoint: string, configuration: Configuration): void
+  initWithSecurityToken(securityToken: string, accessKey: string, secretKey: string, endPoint: string, configuration: Configuration): void
+  asyncUpload(bucketName: string, ossFile: string, sourceFile: string): Promise<AsyncUploadRes>
+  asyncDownload(bucketName: string, ossFile: string, updateDate: string): Promise<string>
+}
+
+type ConfigType = {
+  oss: {
+    accessKey: {
+      AccessKey: string
+      SecretKey: string
+    },
+    endPoint: string
+    bucketName: string
+  }
+}
+
+type DefaultConfigType = {
+  configuration: Configuration
+  accessKey: {
+    AccessKey: string
+    SecretKey: string
+  },
+  endPoint: string
+  bucketName: string
+}
+
+type ConfigInput = {
+  configuration?: Configuration
+  accessKey?: {
+    AccessKey?: string
+    SecretKey?: string
+  },
+  endPoint?: string
+  bucketName?: string
+}
+
+type AsyncUploadInput = {
+  bucketName: string
+  objectKey: string
+  filepath: string
+}
+
+type AsyncDownloadInput = {
+  bucketName: string
+  objectKey: string
+  filepath: string
+}
+
+
+
+const Config: ConfigType = {
   oss: {
     accessKey: {
       AccessKey: '',
@@ -17,15 +77,26 @@ const Config = {
     bucketName: ''
   }
 }
-const { RNAliyunOSS } = NativeModules;
+const RNAliyunOSS = NativeModules.RNAliyunOSS as RNAliyunOSSType;
 const UPLOAD_EVENT = 'uploadProgress';
 const DOWNLOAD_EVENT = 'downloadProgress';
 const _subscriptions = new Map();
 
-let subscription;
+type Events = {
+  [UPLOAD_EVENT]: {
+    status?: 'success'
+    exception?: string
+  }
+  [DOWNLOAD_EVENT]: {
+    currentSize: string
+    totalSize: string
+  }
+}
+
+// let subscription;
 
 //default configuration for OSS Client
-const defaultConfig = {
+const defaultConfig: DefaultConfigType = {
   configuration: {
     maxRetryCount: 3,
     timeoutIntervalForRequest: 30,
@@ -38,7 +109,7 @@ const defaultConfig = {
   bucketName: Config.oss.bucketName
 };
 
-export default AliyunOSS = {
+export default {
 
   //Enable dev mode
   // enableDevMode() {
@@ -49,8 +120,8 @@ export default AliyunOSS = {
    * Initialize the OSS Client
    * Mode: PlainTextAKSK
    */
-  initWithPlainTextAccessKey(config = {}) {
-    config = { ...defaultConfig, ...config };
+  initWithPlainTextAccessKey(configInput: ConfigInput = {}) {
+    let config = { ...defaultConfig, ...configInput } as DefaultConfigType;
     RNAliyunOSS.initWithPlainTextAccessKey(config.accessKey.AccessKey, config.accessKey.SecretKey, config.endPoint, config.configuration);
   },
 
@@ -58,7 +129,7 @@ export default AliyunOSS = {
    * Initialize the OSS Client
    * Mode: ImplementedSigner
    */
-  initWithImplementedSigner(signature, accessKey = defaultConfig.accessKey.AccessKey, endPoint = defaultConfig.endPoint, configuration = defaultConfig.configuration) {
+  initWithImplementedSigner(signature: string, accessKey = defaultConfig.accessKey.AccessKey, endPoint = defaultConfig.endPoint, configuration = defaultConfig.configuration) {
     RNAliyunOSS.initWithImplementedSigner(signature, accessKey, endPoint, configuration);
   },
 
@@ -66,33 +137,21 @@ export default AliyunOSS = {
    * Initialize the OSS Client
    * Mode: SecurityToken (STS)
    */
-  initWithSecurityToken(securityToken, accessKey = defaultConfig.accessKey.AccessKey, secretKey = defaultConfig.accessKey.SecretKey, endPoint = defaultConfig.endPoint, configuration = defaultConfig.configuration) {
+  initWithSecurityToken(securityToken: string, accessKey = defaultConfig.accessKey.AccessKey, secretKey = defaultConfig.accessKey.SecretKey, endPoint = defaultConfig.endPoint, configuration = defaultConfig.configuration) {
     RNAliyunOSS.initWithSecurityToken(securityToken, accessKey, secretKey, endPoint, configuration);
   },
 
   /**
    * Asynchronously uploading
    */
-  asyncUpload(params = {}) {
-    params = {
-      bucketName: defaultConfig.bucketName,
-      objectKey: '',
-      filepath: null,
-      ...params
-    };
+  asyncUpload(params: AsyncUploadInput = { bucketName: defaultConfig.bucketName, objectKey: '', filepath: '' }) {
     return RNAliyunOSS.asyncUpload(params.bucketName, params.objectKey, params.filepath);
   },
 
   /**
    * Asynchronously downloading
    */
-  asyncDownload(params = {}) {
-    params = {
-      bucketName: defaultConfig.bucketName,
-      objectKey: 'aadd.png',
-      filepath: null,
-      ...params
-    };
+  asyncDownload(params: AsyncDownloadInput = { bucketName: defaultConfig.bucketName, objectKey: 'aadd.png', filepath: '' }) {
     return RNAliyunOSS.asyncDownload(params.bucketName, params.objectKey, params.filepath);
   },
 
@@ -101,21 +160,21 @@ export default AliyunOSS = {
    * @param event one of 'uploadProgress' or 'downloadProgress'
    * @param callback a callback function accepts one params: event
    */
-  addEventListener(type, handler) {
+  addEventListener<K extends keyof Events>(type: K, handler: (event: Events[K]) => void): boolean | void {
     var listener;
     if (Platform.OS === 'ios') {
-      const Emitter = new NativeEventEmitter(NativeAliyunOSS);
+      const Emitter = new NativeEventEmitter(RNAliyunOSS as any);
       if (type === UPLOAD_EVENT) {
         listener = Emitter.addListener(
           'uploadProgress',
-          (uploadData) => {
+          (uploadData: Events[K]) => {
             handler(uploadData);
           }
         );
       } else if (type === DOWNLOAD_EVENT) {
         listener = Emitter.addListener(
           'downloadProgress',
-          (downloadData) => {
+          (downloadData: Events[K]) => {
             handler(downloadData);
           }
         );
@@ -127,14 +186,14 @@ export default AliyunOSS = {
       if (type === UPLOAD_EVENT) {
         listener = NativeAppEventEmitter.addListener(
           'uploadProgress',
-          (uploadData) => {
+          (uploadData: Events[K]) => {
             handler(uploadData);
           }
         );
       } else if (type === DOWNLOAD_EVENT) {
         listener = NativeAppEventEmitter.addListener(
           'downloadProgress',
-          (downloadData) => {
+          (downloadData: Events[K]) => {
             handler(downloadData);
           }
         );
@@ -181,7 +240,7 @@ export default AliyunOSS = {
   //     }
   // }
 
-  removeEventListener(handler) {
+  removeEventListener<K extends keyof Events>(handler: (event: Events[K]) => void) {
     var listener = _subscriptions.get(handler);
     if (!listener) {
       return;
