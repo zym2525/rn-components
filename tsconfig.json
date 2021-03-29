@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "rn-components": [
+      "@zero-d/rn-components": [
         "./src/index"
       ],
     },

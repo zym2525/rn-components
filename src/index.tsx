@@ -1,3 +1,5 @@
+export * from './utils'
+
 
 export { default as SmartRefreshLayout } from './components/SmartRefreshLayout'
 export { default as BezierRadarHeader } from './components/SmartRefreshLayout/BezierRadarHeader'
@@ -12,3 +14,4 @@ export { ListEmptyHint, ErrorHint, NoDataProps, NoData } from './components/List
 export { default as Portal } from './components/Portal'
 export { default as BottomSheetBehavior } from './components/Sheet/BottomSheetBehavior'
 export { default as StickyItem, StickyItemProps } from './components/Sticky/StickyItem'
+export { default as Provider } from './components/Provider/Provider'

@@ -1,31 +1,11 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-// import { SmartRefreshLayout } from 'rn-components';
+// import { StyleSheet, View, Text } from 'react-native';
+import { AppNavigator } from './routers/appNavigator'
 
 export default function App() {
-  // const [result, setResult] = React.useState<number | undefined>();
-
-  // React.useEffect(() => {
-  //   RnComponents.multiply(3, 7).then(setResult);
-  // }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: </Text>
-    </View>
+    <AppNavigator />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});

@@ -4,7 +4,7 @@ import Text from '../CustomText/CustomText'
 import { setSize, setSizeText } from '../../utils/common'
 
 const icons = {
-    noData: require('@/img/component/bg-noData.png')
+    noData: require('../../img/component/bg-noData.png')
 }
 
 export const ListEmptyHint = () => (
