@@ -8,7 +8,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.rncomponents.smartrefreshlayout.enums.TwoLevelEvevnts;
+import com.rncomponents.smartrefreshlayout.event.TwoLevelEvent;
 import com.rncomponents.utils.EventUtils;
 import com.scwang.smart.refresh.header.TwoLevelHeader;
 import com.scwang.smart.refresh.header.listener.OnTwoLevelListener;
@@ -181,12 +181,23 @@ public class RNTwoLevelHeaderManager extends ViewGroupManager<TwoLevelHeader> {
         view.setOnTwoLevelListener(new OnTwoLevelListener() {
             @Override
             public boolean onTwoLevel(@NonNull RefreshLayout refreshLayout) {
-                EventUtils.sendEvent(view, TwoLevelEvevnts.onTwoLevel.value(),null);
+//                EventUtils.sendEvent(view, TwoLevelEvevnts.onTwoLevel.value(),null);
+                EventUtils.dispatchEvent(view,new TwoLevelEvent(view.getId()));
                 return true;//true 将会展开二楼状态 false 关闭刷新
             }
         });
 
     }
+
+  @Override
+  public Map getExportedCustomDirectEventTypeConstants() {
+    Map export = super.getExportedCustomDirectEventTypeConstants();
+    if (export == null) {
+      export = MapBuilder.newHashMap();
+    }
+    export.put(TwoLevelEvent.EVENT_NAME, MapBuilder.of("registrationName", TwoLevelEvent.EVENT_NAME));
+    return export;
+  }
 
 }
 

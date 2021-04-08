@@ -1,12 +1,12 @@
 import { NativeModules, DeviceEventEmitter, EmitterSubscription } from 'react-native'
 
-interface GetOrientationCallbackType {
+export interface GetOrientationCallbackType {
     (error: null | number, orientation: null | number): void,
     // (error: null, orientation: number): void,
     // (error: number, orientation: null): void,
 }
 
-type OrientationType = {
+export type OrientationType = {
     /**
      * 获取设备方向
      * @param cb 
@@ -33,14 +33,14 @@ type OrientationType = {
     initialOrientation: OrientationValue | null
 }
 
-enum OrientationValue {
+export enum OrientationValue {
     PORTRAIT = 'PORTRAIT',
     LANDSCAPE = 'LANDSCAPE',
     UNKNOWN = 'UNKNOWN',
     null = 'null',
 }
 
-interface Listeners {
+export interface Listeners {
     [propName: string]: EmitterSubscription;
 }
 
@@ -54,7 +54,7 @@ var specificOrientationDidChangeEvent = 'specificOrientationDidChange';
 var id = 0;
 const META = '__listener_id';
 
-interface OrientationListener {
+export interface OrientationListener {
     (e: OrientationValue): void,
     [META]: string
 }

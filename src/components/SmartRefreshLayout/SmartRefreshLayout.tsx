@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { requireNativeComponent, View, UIManager, findNodeHandle } from 'react-native';
+import { requireNativeComponent, View, UIManager, findNodeHandle, HostComponent } from 'react-native';
 import ClassicsFooter from './ClassicsFooter'
 import ClassicsHeader from './ClassicsHeader'
-import { SmartRefreshLayoutProps, StateChangedEvent, SmartRefreshLayoutNativeEvent, RefreshState, onFooterMovingEvent, onHeaderMovingEvent } from './types'
+import { SmartRefreshLayoutProps, SmartRefreshLayoutStateChangedEvent, SmartRefreshLayoutNativeEvent, RefreshState, SmartRefreshLayoutOnFooterMovingEvent, SmartRefreshLayoutOnHeaderMovingEvent, RNSmartRefreshLayoutProps } from './types'
 import { getViewManagerConfig } from '../../utils/nativeComponentUtils'
+import BezierRadarHeader from './BezierRadarHeader';
+import TwoLevelHeader from './TwoLevelHeader';
 
 const VIEW_MANAGER_NAME: string = 'RNSmartRefreshLayout';
 
-export enum RefreshEventType {
-    OnStateChanged = 1,
-    OnRefresh,
-    OnLoadMore,
-    OnFooterMoving,
-    OnHeaderMoving,
-}
-
+// export enum RefreshEventType {
+//     OnStateChanged = 1,
+//     OnRefresh,
+//     OnLoadMore,
+//     OnFooterMoving,
+//     OnHeaderMoving,
+// }
 
 type State = {
     refreshState: RefreshState
@@ -23,6 +24,10 @@ type State = {
 class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
 
     static RefreshState = RefreshState;
+    static ClassicsFooter = ClassicsFooter;
+    static ClassicsHeader = ClassicsHeader;
+    static BezierRadarHeader = BezierRadarHeader;
+    static TwoLevelHeader = TwoLevelHeader;
 
     static defaultProps = {
         dragRate: 0.5,
@@ -61,28 +66,25 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
 
     onChange(event: SmartRefreshLayoutNativeEvent) {
         // console.log('event: ', event.nativeEvent);
-        // if (event.nativeEvent.type == 8) {
-        //     console.log('event222: ', event.nativeEvent);
+        // switch (event.nativeEvent.type) {
+        //     case RefreshEventType.OnStateChanged:
+        //         this.onStateChanged(event.nativeEvent.event);
+        //         break;
+        //     case RefreshEventType.OnRefresh:
+        //         this._handleOnRefresh();
+        //         break;
+        //     case RefreshEventType.OnLoadMore:
+        //         this._handleOnLoadMore();
+        //         break;
+        //     case RefreshEventType.OnFooterMoving:
+        //         this._handeOnFooterMoving(event.nativeEvent.event);
+        //         break;
+        //     case RefreshEventType.OnHeaderMoving:
+        //         this._handeOnHeaderMoving(event.nativeEvent.event);
+        //         break;
+        //     default:
+        //         break;
         // }
-        switch (event.nativeEvent.type) {
-            case RefreshEventType.OnStateChanged:
-                this.onStateChanged(event.nativeEvent.event);
-                break;
-            case RefreshEventType.OnRefresh:
-                this._handleOnRefresh();
-                break;
-            case RefreshEventType.OnLoadMore:
-                this._handleOnLoadMore();
-                break;
-            case RefreshEventType.OnFooterMoving:
-                this._handeOnFooterMoving(event.nativeEvent.event);
-                break;
-            case RefreshEventType.OnHeaderMoving:
-                this._handeOnHeaderMoving(event.nativeEvent.event);
-                break;
-            default:
-                break;
-        }
     }
 
     _handleOnRefresh() {
@@ -108,21 +110,21 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
      * @param {object} data 
      * @example data:{percent: 0.019999999552965164, maxDragHeight: 400, footerHeight: 200, offset: 4, isDragging: false}
      */
-    _handeOnFooterMoving(data: onFooterMovingEvent) {
-        let { onFooterMoving } = this.props;
-        onFooterMoving && onFooterMoving(data);
-    }
+    // _handeOnFooterMoving(data: SmartRefreshLayoutOnFooterMovingEvent) {
+    //     let { onFooterMoving } = this.props;
+    //     onFooterMoving && onFooterMoving(data);
+    // }
 
-    _handeOnHeaderMoving(data: onHeaderMovingEvent) {
-        let { onHeaderMoving } = this.props;
-        onHeaderMoving && onHeaderMoving(data);
-    }
+    // _handeOnHeaderMoving(data: SmartRefreshLayoutOnHeaderMovingEvent) {
+    //     let { onHeaderMoving } = this.props;
+    //     onHeaderMoving && onHeaderMoving(data);
+    // }
 
-    onStateChanged(event: StateChangedEvent) {
+    onStateChanged(event: SmartRefreshLayoutStateChangedEvent) {
         // console.log('event: ', event);
         let { onStateChanged } = this.props;
         this.setState({
-            refreshState: event.newState
+            refreshState: event.nativeEvent.newState
         })
         /**
          * @example {newState: 'ReleaseToRefresh', oldState: 'PullDownToRefresh'}
@@ -228,7 +230,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
                 return <View collapsable={false}></View>
             };
         } else {
-            return <ClassicsHeader accentColor='#ffffff' spinnerStyle={ClassicsHeader.SpinnerStyle.Translate} /> //<View collapsable={false}></View>
+            return <ClassicsHeader accentColor='#ffffff' spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
         }
     }
 
@@ -249,7 +251,14 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
     render() {
         let { children, style, ...rest } = this.props;
         return (
-            <RNSmartRefreshLayout style={[{ zIndex: -1, }, style]} {...rest} onChange={this.onChange} >
+            <RNSmartRefreshLayout
+                style={[{ zIndex: -1, }, style]}
+                {...rest}
+                onChange={this.onChange}
+                onStateChanged={this.onStateChanged.bind(this)}
+                onRefresh={this._handleOnRefresh.bind(this)}
+                onLoadMore={this._handleOnLoadMore.bind(this)}
+            >
                 {this._renderHeader()}
                 {React.Children.only(children)}
                 {this._renderFooter()}
@@ -258,9 +267,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
     }
 }
 
-interface RNSmartRefreshLayoutProps extends SmartRefreshLayoutProps {
-    onChange: (e: SmartRefreshLayoutNativeEvent) => void
-}
+
 
 let RNSmartRefreshLayout = requireNativeComponent<RNSmartRefreshLayoutProps>(VIEW_MANAGER_NAME);
 

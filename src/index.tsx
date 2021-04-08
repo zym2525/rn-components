@@ -1,5 +1,5 @@
 export * from './utils'
-
+export * from './types'
 
 export { default as SmartRefreshLayout } from './components/SmartRefreshLayout'
 export { default as BezierRadarHeader } from './components/SmartRefreshLayout/BezierRadarHeader'
@@ -15,3 +15,6 @@ export { default as Portal } from './components/Portal'
 export { default as BottomSheetBehavior } from './components/Sheet/BottomSheetBehavior'
 export { default as StickyItem, StickyItemProps } from './components/Sticky/StickyItem'
 export { default as Provider } from './components/Provider/Provider'
+export { default as Modal } from './components/Modal'
+export { default as Toast } from './components/Toast'
+export { default as Touchable, TouchableProps } from './components/Touchable/Touchable'

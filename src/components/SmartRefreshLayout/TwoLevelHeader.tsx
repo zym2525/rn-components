@@ -6,9 +6,9 @@ import type { BaseNativeEvent } from '../../constants/interface'
 
 const VIEW_MANAGER_NAME: string = 'RNTwoLevelHeaderManager';
 
-export enum TwoLevelHeaderEventType {
-    OnTwoLevel = 8
-}
+// export enum TwoLevelHeaderEventType {
+//     OnTwoLevel = 8
+// }
 
 export interface TwoLevelHeaderNativeEvent extends BaseNativeEvent { }
 
@@ -57,19 +57,19 @@ class TwoLevelHeader extends Component<TwoLevelHeaderProps> {
 
     onChange(event: TwoLevelHeaderNativeEvent) {
         // console.log('event: ', event.nativeEvent);
-        switch (event.nativeEvent.type) {
-            case TwoLevelHeaderEventType.OnTwoLevel:
-                this.onTwoLevel();
-                break;
-            default:
-                break;
-        }
+        // switch (event.nativeEvent.type) {
+        //     case TwoLevelHeaderEventType.OnTwoLevel:
+        //         this.onTwoLevel();
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
 
-    onTwoLevel() {
-        let { onTwoLevel } = this.props;
-        onTwoLevel && onTwoLevel();
-    }
+    // onTwoLevel() {
+    //     let { onTwoLevel } = this.props;
+    //     onTwoLevel && onTwoLevel();
+    // }
 
     render() {
         return (

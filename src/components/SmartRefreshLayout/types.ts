@@ -1,4 +1,4 @@
-import type { ViewProps, ViewStyle, StyleProp } from 'react-native';
+import type { ViewProps, ViewStyle, StyleProp, NativeSyntheticEvent } from 'react-native';
 import type { BaseNativeEvent } from '../../constants/interface'
 import type { ReactNode } from 'react'
 
@@ -64,7 +64,9 @@ export type TwoLevelHeaderProps = {
      */
     bottomPullUpToCloseRate?: number,
 
-    onTwoLevel?: () => void
+    onTwoLevel?: () => void,
+
+    style?: StyleProp<ViewStyle>
 }
 
 export type SmartRefreshLayoutProps = {
@@ -178,11 +180,11 @@ export type SmartRefreshLayoutProps = {
      */
     onLoadMore?: () => void,
 
-    onStateChanged?: (e: StateChangedEvent) => void,
+    onStateChanged?: (e: SmartRefreshLayoutStateChangedEvent) => void,
 
-    onFooterMoving?: (e: onFooterMovingEvent) => void,
+    onFooterMoving?: (e: SmartRefreshLayoutOnFooterMovingEvent) => void,
 
-    onHeaderMoving?: (e: onHeaderMovingEvent) => void,
+    onHeaderMoving?: (e: SmartRefreshLayoutOnHeaderMovingEvent) => void,
 
     HeaderComponent?: () => ReactNode,
 
@@ -213,14 +215,14 @@ export enum RefreshState {
     TwoLevelFinish = 'TwoLevelFinish',
 }
 
-export interface StateChangedEvent {
+export interface SmartRefreshLayoutStateChangedEvent extends NativeSyntheticEvent<{
     newState: RefreshState,
     oldState: RefreshState,
-}
+}> { }
 
 export interface SmartRefreshLayoutNativeEvent extends BaseNativeEvent { }
 
-export interface onFooterMovingEvent {
+export interface SmartRefreshLayoutOnFooterMovingEvent extends NativeSyntheticEvent<{
     /**
      * @param isDragging true 手指正在拖动 false 回弹动画
      */
@@ -241,9 +243,9 @@ export interface onFooterMovingEvent {
     * @param maxDragHeight 最大拖动高度
     */
     maxDragHeight: number
-}
+}> { }
 
-export interface onHeaderMovingEvent {
+export interface SmartRefreshLayoutOnHeaderMovingEvent extends NativeSyntheticEvent<{
     /**
      * @param isDragging true 手指正在拖动 false 回弹动画
      */
@@ -264,4 +266,8 @@ export interface onHeaderMovingEvent {
     * @param maxDragHeight 最大拖动高度
     */
     maxDragHeight: number
+}> { }
+
+export interface RNSmartRefreshLayoutProps extends SmartRefreshLayoutProps {
+    onChange: (e: SmartRefreshLayoutNativeEvent) => void
 }
