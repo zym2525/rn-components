@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    View, StyleSheet, Text, Platform,
+    Platform,
     TouchableWithoutFeedbackProps,
     TouchableNativeFeedbackProps,
     TouchableHighlightProps,
@@ -32,7 +32,9 @@ interface MyTouchableOpacityProps extends TouchableOpacityProps {
 
 export type TouchableProps = MyTouchableNativeFeedbackProps & MyTouchableHighlightProps & MyTouchableWithoutFeedbackProps & MyTouchableOpacityProps
 
+
 const DefaultTouchable = Platform.select({
+    //@ts-ignore
     android: TouchableNativeFeedback,
     ios: TouchableHighlight,
     default: TouchableWithoutFeedback,
@@ -58,6 +60,7 @@ const Touchable = ({ TouchableComponent, onPress, ...rest }: TouchableProps) => 
     }
 
     return (
+        //@ts-ignore
         <TargetComponent {...defaultTouchableProps} {...rest} onPress={pressDebounced} />
     )
 }

@@ -49,7 +49,7 @@ export function usePrevious(value: any) {
 }
 
 export function useForceUpdate() {
-    const [ignored, forceUpdate] = React.useReducer(x => x + 1, 0);
+    const [, forceUpdate] = React.useReducer(x => x + 1, 0);
     return forceUpdate;
 }
 

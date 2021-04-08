@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, TextStyle, View, StyleSheet } from 'react-native';
+import { Text, TextInput, TextStyle, View } from 'react-native';
 import Modal from './Modal';
 import type { CallbackOnBackHandler, CallbackOrActions } from './types';
 import promptStyles, { PromptStyle } from './style/prompt';

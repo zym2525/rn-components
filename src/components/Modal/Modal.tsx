@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, Text, TextStyle, TouchableNativeFeedback, TouchableHighlight, TouchableWithoutFeedback, View, ViewStyle, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
+import { StyleProp, Text, TextStyle, TouchableHighlight, TouchableWithoutFeedback, View, ViewStyle, KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import type alert from './alert';
 import RCModal from './ModalView';
 import type operation from './operation';

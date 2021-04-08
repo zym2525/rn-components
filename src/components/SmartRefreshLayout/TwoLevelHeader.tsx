@@ -55,6 +55,7 @@ class TwoLevelHeader extends Component<TwoLevelHeaderProps> {
         );
     }
 
+    //@ts-ignore
     onChange(event: TwoLevelHeaderNativeEvent) {
         // console.log('event: ', event.nativeEvent);
         // switch (event.nativeEvent.type) {

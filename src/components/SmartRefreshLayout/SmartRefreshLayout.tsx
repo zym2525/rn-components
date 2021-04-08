@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { requireNativeComponent, View, UIManager, findNodeHandle, HostComponent } from 'react-native';
+import { requireNativeComponent, View, UIManager, findNodeHandle } from 'react-native';
 import ClassicsFooter from './ClassicsFooter'
 import ClassicsHeader from './ClassicsHeader'
-import { SmartRefreshLayoutProps, SmartRefreshLayoutStateChangedEvent, SmartRefreshLayoutNativeEvent, RefreshState, SmartRefreshLayoutOnFooterMovingEvent, SmartRefreshLayoutOnHeaderMovingEvent, RNSmartRefreshLayoutProps } from './types'
+import { SmartRefreshLayoutProps, SmartRefreshLayoutStateChangedEvent, SmartRefreshLayoutNativeEvent, RefreshState, RNSmartRefreshLayoutProps } from './types'
 import { getViewManagerConfig } from '../../utils/nativeComponentUtils'
 import BezierRadarHeader from './BezierRadarHeader';
 import TwoLevelHeader from './TwoLevelHeader';
@@ -64,6 +64,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
         }
     }
 
+    //@ts-ignore
     onChange(event: SmartRefreshLayoutNativeEvent) {
         // console.log('event: ', event.nativeEvent);
         // switch (event.nativeEvent.type) {
