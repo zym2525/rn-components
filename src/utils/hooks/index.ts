@@ -63,19 +63,18 @@ export function useClientRect() {
     return [rect, ref];
 }
 
-// export function useSafeRequest(fn: () => void, callback: () => void, deps: any[] = []) {
-//     useEffect(() => {
-//         let ignore = false;
-//         async function getData() {
-//             const response = await fn();
-//             const json = await response.json();
-//             if (!ignore) callback(json);
-//         }
+export function useSafeRequest<T>(fn: () => T, callback: (res: T) => void, deps: any[] = []) {
+    useEffect(() => {
+        let ignore = false;
+        async function getData() {
+            const response = await fn();
+            if (!ignore) callback(response);
+        }
 
-//         getData();
-//         return () => { ignore = true };
-//     }, deps);
-// }
+        getData();
+        return () => { ignore = true };
+    }, deps);
+}
 
 export function useInterval(callback: () => void, delay: number) {
     const savedCallback = useRef<() => void>(callback);

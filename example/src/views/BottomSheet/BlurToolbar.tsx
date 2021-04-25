@@ -27,7 +27,7 @@ export default class Example extends React.Component<Props> {
 
     secScreenHeight = this.fullScreenHeight - this.headerHeight;
 
-    initHeight = 400;
+    initHeight = 200;
 
     secScreenPoint = this.headerHeight / (this.fullScreenHeight - this.initHeight)
 
