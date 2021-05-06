@@ -231,7 +231,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
                 return <View collapsable={false}></View>
             };
         } else {
-            return <ClassicsHeader accentColor='#ffffff' spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
+            return <ClassicsHeader accentColor='#999999' spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
         }
     }
 
@@ -245,7 +245,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
                 return <View collapsable={false}></View>
             };
         } else {
-            return <ClassicsFooter accentColor='#ffffff' primaryColor='#59b8fa' spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
+            return <ClassicsFooter accentColor='#999999' spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
         }
     }
 

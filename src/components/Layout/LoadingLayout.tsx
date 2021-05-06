@@ -17,18 +17,20 @@ export type LoadingLayoutProps = {
     loadError?(): void
 
     style?: StyleProp<ViewStyle>
+
+    EmptyComponent?: React.ReactElement
 }
 
 class LoadingLayout extends Component<LoadingLayoutProps> {
 
     render() {
-        let { isLoaded, error, children, loadError, style } = this.props;
+        let { isLoaded, error, children, loadError, style, EmptyComponent } = this.props;
         return (
             <View style={[{ flex: 1 }, style]}>
                 {isLoaded
                     ? error ? <ErrorHint onPress={loadError} />
                         : children
-                    : <ListEmptyHint />}
+                    : EmptyComponent ? EmptyComponent : <ListEmptyHint />}s
             </View>
         );
     }
