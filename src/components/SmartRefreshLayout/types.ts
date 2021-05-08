@@ -75,6 +75,10 @@ export type SmartRefreshLayoutProps = {
      */
     primaryColor?: string,
     /**
+     * @param 强调颜色
+     */
+    accentColor?: string,
+    /**
      * @param 显示下拉高度/手指真实下拉高度=阻尼效果
      */
     dragRate?: number,

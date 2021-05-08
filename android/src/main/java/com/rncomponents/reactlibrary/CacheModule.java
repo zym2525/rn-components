@@ -37,7 +37,12 @@ public class CacheModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void geCacheSize(){
-      CacheUtils.getTotalCacheSize(getReactApplicationContext());
+    public void getCacheSize(Promise promise){
+      try {
+        String cache =CacheUtils.getTotalCacheSize(getReactApplicationContext());
+        promise.resolve(cache);
+      } catch (Exception e) {
+        promise.reject(e);
+      }
     }
 }

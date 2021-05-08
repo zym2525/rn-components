@@ -1,5 +1,6 @@
 import * as React from 'react';
-import _, { DebouncedFunc } from 'lodash';
+import _ from 'lodash';
+import type { DebouncedFunc } from 'lodash';
 
 const { useRef, useEffect, useState, useCallback } = React;
 

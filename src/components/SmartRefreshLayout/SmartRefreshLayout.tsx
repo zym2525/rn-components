@@ -54,6 +54,8 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
         disableContentWhenRefresh: true,
         disableContentWhenLoading: true,
         enableOverScrollDrag: true,
+        accentColor: '#999999',
+        primaryColor: '#ffffff'
     }
 
     constructor(props: SmartRefreshLayoutProps) {
@@ -222,7 +224,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
     }
 
     _renderHeader() {
-        let { HeaderComponent } = this.props;
+        let { HeaderComponent, accentColor, primaryColor } = this.props;
         if (HeaderComponent && typeof HeaderComponent == 'function') {
             let header = HeaderComponent();
             if (React.isValidElement(header)) {
@@ -231,12 +233,12 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
                 return <View collapsable={false}></View>
             };
         } else {
-            return <ClassicsHeader accentColor='#999999' spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
+            return <ClassicsHeader accentColor={accentColor} primaryColor={primaryColor} spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
         }
     }
 
     _renderFooter() {
-        let { FooterComponent } = this.props;
+        let { FooterComponent, accentColor, primaryColor } = this.props;
         if (FooterComponent && typeof FooterComponent == 'function') {
             let footer = FooterComponent();
             if (React.isValidElement(footer)) {
@@ -245,7 +247,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
                 return <View collapsable={false}></View>
             };
         } else {
-            return <ClassicsFooter accentColor='#999999' spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
+            return <ClassicsFooter accentColor={accentColor} primaryColor={primaryColor} spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
         }
     }
 
