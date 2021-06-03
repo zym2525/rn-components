@@ -19,9 +19,9 @@ export const ErrorHint = ({ onPress }: { onPress?: () => void }) => (
 )
 
 export type NoDataProps = {
-    text: string,
-    style: StyleProp<ViewStyle>,
-    bgImg: ImageSourcePropType
+    text?: string,
+    style?: StyleProp<ViewStyle>,
+    bgImg?: ImageSourcePropType
 }
 
 export const NoData = ({ text = '没有查找到你要的数据', style, bgImg = icons.noData }: NoDataProps) => (

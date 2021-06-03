@@ -13,3 +13,5 @@ export {
     sort_ascii,
     compose
 } from './common/mixins'
+
+export * from './getConfig'

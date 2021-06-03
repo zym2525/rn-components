@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { requireNativeComponent } from 'react-native';
-import { SpinnerStyle } from '../../constants/enum'
+import { SpinnerStyle } from './enum'
 import type { ClassicsFooterProps } from './types';
 
 class ClassicsFooter extends Component<ClassicsFooterProps> {

@@ -1,9 +1,12 @@
 import ScaleSize from './scaleSize';
+import { getConfig } from '../getConfig'
+
+let config = getConfig();
 
 const instance = new ScaleSize({
-    portraitWidth: 750,
-    landScapeWidth: 1334,
-    defaultPixel: 2
+    portraitWidth: config.portraitWidth,
+    landScapeWidth: config.landScapeWidth,
+    defaultPixel: config.defaultPixel
 })
 
 export function setSizeText(size: number): number {
