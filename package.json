@@ -1,6 +1,6 @@
 {
   "name": "@zero-d/rn-components",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "rn-components",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
