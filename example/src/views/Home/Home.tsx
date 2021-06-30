@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { SmartRefreshLayout, Text, Modal, Touchable, ListEmptyHint, AliyunOSS } from '@zero-d/rn-components'
+import { SmartRefreshLayout, Text, Modal, Touchable } from '@zero-d/rn-components'
 import type { NavigationStackScreenProps } from 'react-navigation-stack'
 // import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
-import { TouchableNativeFeedback, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 export interface HomeProps extends NavigationStackScreenProps {
 }
 

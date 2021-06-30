@@ -7,9 +7,8 @@ import {
     TouchableHighlightProps,
     TouchableOpacityProps,
     GestureResponderEvent,
-    TouchableOpacityComponent
 } from 'react-native';
-import { TouchableNativeFeedback, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableNativeFeedback, TouchableHighlight, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { useDebounce } from '@zero-d/rn-components'
 
 export type TouchableProps<T extends TouchableComponentType> = {
