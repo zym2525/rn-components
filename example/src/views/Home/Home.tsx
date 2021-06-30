@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { SmartRefreshLayout, Text, Modal, Touchable, ListEmptyHint } from '@zero-d/rn-components'
+import { View, StyleSheet, FlatList } from 'react-native';
+import { SmartRefreshLayout, Text, Modal, Touchable, ListEmptyHint, AliyunOSS } from '@zero-d/rn-components'
 import type { NavigationStackScreenProps } from 'react-navigation-stack'
 // import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
-
+import { TouchableNativeFeedback, TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler'
 export interface HomeProps extends NavigationStackScreenProps {
 }
 
@@ -33,7 +33,9 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
 
     componentDidMount() {
-
+        // AliyunOSS.addEventListener('downloadProgress',function(e){
+        //     e.currentSize
+        // })
     }
 
     click() {
@@ -65,7 +67,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                     }
                 />
                 <Text onPress={this.click.bind(this)} style={{ fontSize: 30 }}>点我</Text>
-                <Touchable onPress={() => console.log('rrrrr')} TouchableComponent={TouchableOpacity}>
+                <Touchable onPress={() => console.log('rrrrr')} TouchableComponent={TouchableNativeFeedback} >
                     <View><Text style={{ fontSize: 30 }}>hahahahaha</Text></View>
                 </Touchable>
             </View>

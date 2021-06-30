@@ -1,37 +1,23 @@
 import * as React from 'react';
+import type { ComponentProps, ComponentType } from 'react';
 import {
     Platform,
     TouchableWithoutFeedbackProps,
     TouchableNativeFeedbackProps,
     TouchableHighlightProps,
     TouchableOpacityProps,
-    GestureResponderEvent
+    GestureResponderEvent,
+    TouchableOpacityComponent
 } from 'react-native';
 import { TouchableNativeFeedback, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity } from 'react-native-gesture-handler'
 import { useDebounce } from '@zero-d/rn-components'
 
-interface MyTouchableNativeFeedbackProps extends TouchableNativeFeedbackProps {
-    TouchableComponent?: typeof TouchableNativeFeedback;
-    children: React.ReactNode;
-}
+export type TouchableProps<T extends TouchableComponentType> = {
+    TouchableComponent?: T;
+    children?: Readonly<React.ReactNode>;
+} & (ComponentProps<T>)
 
-interface MyTouchableHighlightProps extends TouchableHighlightProps {
-    TouchableComponent?: typeof TouchableHighlight;
-    children: React.ReactNode;
-}
-
-interface MyTouchableWithoutFeedbackProps extends TouchableWithoutFeedbackProps {
-    TouchableComponent?: typeof TouchableWithoutFeedback;
-    children: React.ReactNode;
-}
-
-interface MyTouchableOpacityProps extends TouchableOpacityProps {
-    TouchableComponent?: typeof TouchableOpacity;
-    children: React.ReactNode;
-}
-
-export type TouchableProps = MyTouchableNativeFeedbackProps & MyTouchableHighlightProps & MyTouchableWithoutFeedbackProps & MyTouchableOpacityProps
-
+export type TouchableComponentType = ComponentType<TouchableOpacityProps | TouchableNativeFeedbackProps | TouchableHighlightProps | TouchableWithoutFeedbackProps>
 
 const DefaultTouchable = Platform.select({
     //@ts-ignore
@@ -43,9 +29,9 @@ const DefaultTouchable = Platform.select({
 /**
  * 
  * @returns a react-native-gesture-handler Touchable
- * @description 断言写的太烂了 根据实际情况写吧
  */
-const Touchable = ({ TouchableComponent, onPress, ...rest }: TouchableProps) => {
+const Touchable = <T extends TouchableComponentType,>({ TouchableComponent, ...rest }: TouchableProps<T>) => {
+    const { onPress } = rest as TouchableWithoutFeedbackProps;
     // let [count, setCount] = React.useState(0)
     const TargetComponent = TouchableComponent || DefaultTouchable;
     let defaultTouchableProps = {};
@@ -60,7 +46,7 @@ const Touchable = ({ TouchableComponent, onPress, ...rest }: TouchableProps) => 
     }
 
     return (
-        //@ts-ignore
+        // @ts-ignore
         <TargetComponent {...defaultTouchableProps} {...rest} onPress={pressDebounced} />
     )
 }
