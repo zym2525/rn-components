@@ -12,7 +12,7 @@ type Props = TextProps & {
 }
 
 function Text({ style, children, ...rest }: Props) {
-    return <RNText style={[myStyle, style]} {...rest}>{children}</RNText>
+    return <RNText style={[myStyle, style]} allowFontScaling={false} {...rest}>{children}</RNText>
 }
 
 export default Text;

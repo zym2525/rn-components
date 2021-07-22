@@ -46,6 +46,8 @@ public class SmartRefreshLayoutManager extends ViewGroupManager<ReactSmartRefres
 
     private static final int COMMAND_AUTO_REFRESH = 101;
     private static final int COMMAND_AUTO_LOAD_MORE = 102;
+    private static final int COMMAND_AUTO_REFRESH_AnimationOnly = 109;
+    private static final int COMMAND_AUTO_LOAD_MORE_AnimationOnly = 110;
     private static final int COMMAND_FINISH_REFRESH = 103;
     private static final int COMMAND_FINISH_LOAD_MORE = 104;
     private static final int COMMAND_FINISH_LOAD_MORE_WITH_NO_MORE_DATA = 105;
@@ -380,6 +382,8 @@ public class SmartRefreshLayoutManager extends ViewGroupManager<ReactSmartRefres
         return MapBuilder.<String, Integer>builder()
                 .put("autoRefresh", COMMAND_AUTO_REFRESH)
                 .put("autoLoadMore", COMMAND_AUTO_LOAD_MORE)
+                .put("autoRefreshAnimationOnly", COMMAND_AUTO_REFRESH_AnimationOnly)
+                .put("autoLoadMoreAnimationOnly", COMMAND_AUTO_LOAD_MORE_AnimationOnly)
                 .put("finishRefresh", COMMAND_FINISH_REFRESH)
                 .put("finishLoadMore", COMMAND_FINISH_LOAD_MORE)
                 .put("finishLoadMoreWithNoMoreData", COMMAND_FINISH_LOAD_MORE_WITH_NO_MORE_DATA)
@@ -399,6 +403,12 @@ public class SmartRefreshLayoutManager extends ViewGroupManager<ReactSmartRefres
                 return;
             case COMMAND_AUTO_LOAD_MORE:
                 autoLoadMore(view,args.getInt(0));
+                return;
+            case COMMAND_AUTO_REFRESH_AnimationOnly:
+                view.autoRefreshAnimationOnly();
+                return;
+            case COMMAND_AUTO_LOAD_MORE_AnimationOnly:
+                view.autoLoadMoreAnimationOnly();
                 return;
             case COMMAND_FINISH_REFRESH:
                 finishRefresh(view,args);

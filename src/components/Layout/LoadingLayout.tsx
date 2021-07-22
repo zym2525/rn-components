@@ -30,7 +30,7 @@ class LoadingLayout extends Component<LoadingLayoutProps> {
                 {isLoaded
                     ? error ? <ErrorHint onPress={loadError} />
                         : children
-                    : EmptyComponent ? EmptyComponent : <ListEmptyHint />}s
+                    : EmptyComponent ? EmptyComponent : <ListEmptyHint />}
             </View>
         );
     }

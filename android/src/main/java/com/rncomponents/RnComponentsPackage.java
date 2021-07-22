@@ -7,7 +7,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.rncomponents.reactlibrary.CacheModule;
 import com.rncomponents.reactlibrary.OrientationModule;
-import com.rncomponents.reactlibrary.RNAliyunOssModule;
 import com.rncomponents.smartrefreshlayout.manager.RNClassicsFooter;
 import com.rncomponents.smartrefreshlayout.manager.RNClassicsHeader;
 import com.rncomponents.smartrefreshlayout.manager.RNRadarHeaderManager;
@@ -26,7 +25,6 @@ public class RnComponentsPackage implements ReactPackage {
       // Modules from third-party
       new CacheModule(reactContext),
       new OrientationModule(reactContext),
-      new RNAliyunOssModule(reactContext),
     });
   }
 

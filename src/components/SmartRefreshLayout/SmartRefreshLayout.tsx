@@ -152,6 +152,17 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
     }
 
     /**
+     * @description 自动刷新，只显示动画不执行刷新
+     */
+    autoRefreshAnimationOnly() {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this),
+            getViewManagerConfig(VIEW_MANAGER_NAME).Commands.autoRefreshAnimationOnly,
+            [],
+        );
+    }
+
+    /**
      * @description 自动加载
      * @param {number} delayed 延迟毫秒 
      */
@@ -160,6 +171,17 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
             findNodeHandle(this),
             getViewManagerConfig(VIEW_MANAGER_NAME).Commands.autoLoadMore,
             [delayed],
+        );
+    }
+
+    /**
+     * @description 自动加载，只显示动画不执行刷新
+     */
+    autoLoadMoreAnimationOnly() {
+        UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this),
+            getViewManagerConfig(VIEW_MANAGER_NAME).Commands.autoLoadMoreAnimationOnly,
+            [],
         );
     }
 
