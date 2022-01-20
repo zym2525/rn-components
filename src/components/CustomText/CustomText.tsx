@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { FC } from 'react'
 import { Text as RNText, TextStyle, TextProps } from 'react-native'
 
 const myStyle: TextStyle = {
@@ -7,11 +7,7 @@ const myStyle: TextStyle = {
     textAlignVertical: 'center',
 }
 
-type Props = TextProps & {
-    children?: ReactNode
-}
-
-function Text({ style, children, ...rest }: Props) {
+const Text: FC<TextProps> = ({ style, children, ...rest }) => {
     return <RNText style={[myStyle, style]} allowFontScaling={false} {...rest}>{children}</RNText>
 }
 

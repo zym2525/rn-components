@@ -23,7 +23,7 @@ export function classnames(...args: any[]) {
  * @param obj
  * @returns {string}
  */
-export function sort_ascii(obj: { [propName: string]: string | number; }) {
+export function sort_ascii(obj: { [propName: string]: string | number; }): string {
     let arr = new Array();
     let num = 0;
     for (let i in obj) {
@@ -55,7 +55,7 @@ export function sort_ascii(obj: { [propName: string]: string | number; }) {
  * const enhance = compose(pure, withProps({foo: 'bar'}));
  * const Component = enhance(MyComponent);
  */
-export function compose() {
+export function compose(): Function {
     for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
         funcs[_key] = arguments[_key];
     }

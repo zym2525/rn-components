@@ -19,7 +19,7 @@ export type TouchableProps<T extends TouchableComponentType> = {
 export type TouchableComponentType = ComponentType<TouchableOpacityProps | TouchableNativeFeedbackProps | TouchableHighlightProps | TouchableWithoutFeedbackProps>
 
 const DefaultTouchable = Platform.select({
-    //@ts-ignore
+    // @ts-ignore
     android: TouchableNativeFeedback,
     ios: TouchableHighlight,
     default: TouchableWithoutFeedback,
@@ -35,7 +35,7 @@ const Touchable = <T extends TouchableComponentType,>({ TouchableComponent, ...r
     const TargetComponent = TouchableComponent || DefaultTouchable;
     let defaultTouchableProps = {};
     if (!TouchableComponent && TargetComponent === TouchableHighlight) {
-        defaultTouchableProps = { underlayColor: 'rgba(0, 0, 0, 0.1)' };
+        defaultTouchableProps = { underlayColor: 'rgba(0, 0, 0, 0.1)' } as TouchableHighlightProps;
     }
     let pressDebounced: (e: GestureResponderEvent) => void = useDebounce<(e: GestureResponderEvent) => void>(debouncePress);
 
