@@ -1,14 +1,32 @@
 import React, { FC } from 'react'
-import { Text as RNText, TextStyle, TextProps } from 'react-native'
+import { Text as RNText, TextStyle, TextProps, StyleProp } from 'react-native'
+import { withTheme } from 'react-native-paper'
 
 const myStyle: TextStyle = {
-    fontFamily: 'normal',
     includeFontPadding: false,
     textAlignVertical: 'center',
 }
 
-const Text: FC<TextProps> = ({ style, children, ...rest }) => {
-    return <RNText style={[myStyle, style]} allowFontScaling={false} {...rest}>{children}</RNText>
+type Props = React.ComponentProps<typeof RNText> & {
+    style?: StyleProp<TextStyle>;
+    /**
+     * @optional
+     */
+    theme: ReactNativePaper.Theme;
+};
+
+const Text: FC<Props> = ({ style, theme, ...rest }) => {
+    return <RNText
+        style={[
+            {
+                ...theme.fonts.regular,
+                color: theme.colors.text,
+            },
+            myStyle,
+            style
+        ]}
+        allowFontScaling={false}
+        {...rest} />
 }
 
-export default Text;
+export default withTheme(Text);

@@ -1,4 +1,4 @@
-import ScaleSize from './scaleSize';
+import ScaleSize from '../../styles/scaleSize';
 import { getConfig } from '../getConfig'
 
 let config = getConfig();

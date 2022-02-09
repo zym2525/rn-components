@@ -1,5 +1,4 @@
 import type { ViewProps, ViewStyle, StyleProp, NativeSyntheticEvent } from 'react-native';
-import type { BaseNativeEvent } from '../../constants/interface'
 import type { ReactNode } from 'react'
 
 export type BaseProps = ViewProps & {
@@ -70,6 +69,10 @@ export type TwoLevelHeaderProps = {
 }
 
 export type SmartRefreshLayoutProps = {
+    /**
+   * @optional
+   */
+    theme: ReactNativePaper.Theme,
     /**
      * @param 主题颜色
      */
@@ -224,8 +227,6 @@ export interface SmartRefreshLayoutStateChangedEvent extends NativeSyntheticEven
     oldState: RefreshState,
 }> { }
 
-export interface SmartRefreshLayoutNativeEvent extends BaseNativeEvent { }
-
 export interface SmartRefreshLayoutOnFooterMovingEvent extends NativeSyntheticEvent<{
     /**
      * @param isDragging true 手指正在拖动 false 回弹动画
@@ -271,7 +272,3 @@ export interface SmartRefreshLayoutOnHeaderMovingEvent extends NativeSyntheticEv
     */
     maxDragHeight: number
 }> { }
-
-export interface RNSmartRefreshLayoutProps extends SmartRefreshLayoutProps {
-    onChange: (e: SmartRefreshLayoutNativeEvent) => void
-}

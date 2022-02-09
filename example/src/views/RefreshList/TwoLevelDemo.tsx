@@ -3,11 +3,9 @@ import { View, FlatList, StyleSheet, Dimensions, StatusBar, } from 'react-native
 import { SmartRefreshLayout, TwoLevelHeader, ClassicsHeader, SmartRefreshLayoutOnHeaderMovingEvent, SmartRefreshLayoutStateChangedEvent, Text } from '@zero-d/rn-components'
 import Animated, { debug, Value, clockRunning, startClock, timing, set, cond, Clock, event, sub, min, Easing, block, stopClock, divide, add, max } from 'react-native-reanimated'
 import { px2dp } from '../../utils';
-import type { NavigationStackScreenProps, NavigationStackOptions } from 'react-navigation-stack'
+import type { StackScreenProps } from '@react-navigation/stack'
 
-type Props = NavigationStackScreenProps & {
-
-}
+type Props = StackScreenProps<RootStackParamList, 'TwoLevelDemo'>
 
 type State = {
     data: number[]

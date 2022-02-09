@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { requireNativeComponent, View, UIManager, findNodeHandle } from 'react-native';
 import ClassicsFooter from './ClassicsFooter'
 import ClassicsHeader from './ClassicsHeader'
-import { SmartRefreshLayoutProps, SmartRefreshLayoutStateChangedEvent, SmartRefreshLayoutNativeEvent, RefreshState, RNSmartRefreshLayoutProps } from './types'
+import { SmartRefreshLayoutProps, SmartRefreshLayoutStateChangedEvent, RefreshState } from './types'
 import { getViewManagerConfig } from '../../utils/nativeComponentUtils'
 import BezierRadarHeader from './BezierRadarHeader';
 import TwoLevelHeader from './TwoLevelHeader';
+import { SpinnerStyle } from './enum'
+import { withTheme, Colors } from 'react-native-paper'
 
 const VIEW_MANAGER_NAME: string = 'RNSmartRefreshLayout';
 
@@ -20,14 +22,14 @@ const VIEW_MANAGER_NAME: string = 'RNSmartRefreshLayout';
 type State = {
     refreshState: RefreshState
 }
-
-class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
+export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
 
     static RefreshState = RefreshState;
     static ClassicsFooter = ClassicsFooter;
     static ClassicsHeader = ClassicsHeader;
     static BezierRadarHeader = BezierRadarHeader;
     static TwoLevelHeader = TwoLevelHeader;
+    static SpinnerStyle = SpinnerStyle;
 
     static defaultProps = {
         dragRate: 0.5,
@@ -54,40 +56,15 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
         disableContentWhenRefresh: true,
         disableContentWhenLoading: true,
         enableOverScrollDrag: true,
-        accentColor: '#999999',
-        primaryColor: '#ffffff'
+        // accentColor: '#999999',
+        // primaryColor: '#ffffff'
     }
 
     constructor(props: SmartRefreshLayoutProps) {
         super(props);
-        this.onChange = this.onChange.bind(this);
         this.state = {
             refreshState: RefreshState.Null
         }
-    }
-
-    //@ts-ignore
-    onChange(event: SmartRefreshLayoutNativeEvent) {
-        // console.log('event: ', event.nativeEvent);
-        // switch (event.nativeEvent.type) {
-        //     case RefreshEventType.OnStateChanged:
-        //         this.onStateChanged(event.nativeEvent.event);
-        //         break;
-        //     case RefreshEventType.OnRefresh:
-        //         this._handleOnRefresh();
-        //         break;
-        //     case RefreshEventType.OnLoadMore:
-        //         this._handleOnLoadMore();
-        //         break;
-        //     case RefreshEventType.OnFooterMoving:
-        //         this._handeOnFooterMoving(event.nativeEvent.event);
-        //         break;
-        //     case RefreshEventType.OnHeaderMoving:
-        //         this._handeOnHeaderMoving(event.nativeEvent.event);
-        //         break;
-        //     default:
-        //         break;
-        // }
     }
 
     _handleOnRefresh() {
@@ -246,7 +223,7 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
     }
 
     _renderHeader() {
-        let { HeaderComponent, accentColor, primaryColor } = this.props;
+        let { HeaderComponent, accentColor: customAccentColor, primaryColor: customPrimaryColor, theme } = this.props;
         if (HeaderComponent && typeof HeaderComponent == 'function') {
             let header = HeaderComponent();
             if (React.isValidElement(header)) {
@@ -255,12 +232,15 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
                 return <View collapsable={false}></View>
             };
         } else {
-            return <ClassicsHeader accentColor={accentColor} primaryColor={primaryColor} spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
+            const accentColor = customAccentColor || Colors.white;
+            const primaryColor = customPrimaryColor || theme.colors.primary;
+            console.log('primaryColor: ', primaryColor);
+            return <ClassicsHeader accentColor={accentColor} primaryColor={primaryColor} spinnerStyle={ClassicsHeader.SpinnerStyle.Translate} /> //<View collapsable={false}></View>
         }
     }
 
     _renderFooter() {
-        let { FooterComponent, accentColor, primaryColor } = this.props;
+        let { FooterComponent, accentColor: customAccentColor, primaryColor: customPrimaryColor, theme } = this.props;
         if (FooterComponent && typeof FooterComponent == 'function') {
             let footer = FooterComponent();
             if (React.isValidElement(footer)) {
@@ -269,17 +249,22 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
                 return <View collapsable={false}></View>
             };
         } else {
-            return <ClassicsFooter accentColor={accentColor} primaryColor={primaryColor} spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> //<View collapsable={false}></View>
+            const accentColor = customAccentColor || Colors.white;
+            const primaryColor = customPrimaryColor || theme.colors.primary;
+            return <ClassicsFooter accentColor={accentColor} primaryColor={primaryColor} spinnerStyle={ClassicsHeader.SpinnerStyle.Scale} /> // 
         }
     }
 
     render() {
-        let { children, style, ...rest } = this.props;
+        let { children, style, accentColor: customAccentColor, primaryColor: customPrimaryColor, theme, ...rest } = this.props;
+        const accentColor = customAccentColor || Colors.white;
+        const primaryColor = customPrimaryColor || theme.colors.primary;
         return (
             <RNSmartRefreshLayout
                 style={[{ zIndex: -1, }, style]}
                 {...rest}
-                onChange={this.onChange}
+                accentColor={accentColor}
+                primaryColor={primaryColor}
                 onStateChanged={this.onStateChanged.bind(this)}
                 onRefresh={this._handleOnRefresh.bind(this)}
                 onLoadMore={this._handleOnLoadMore.bind(this)}
@@ -294,6 +279,6 @@ class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
 
 
 
-let RNSmartRefreshLayout = requireNativeComponent<RNSmartRefreshLayoutProps>(VIEW_MANAGER_NAME);
+let RNSmartRefreshLayout = requireNativeComponent<Omit<SmartRefreshLayoutProps, 'theme'>>(VIEW_MANAGER_NAME);
 
-export default SmartRefreshLayout;
+export default withTheme(SmartRefreshLayout);

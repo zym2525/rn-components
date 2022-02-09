@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import type { NavigationStackScreenComponent } from 'react-navigation-stack'
+import type { StackScreenProps } from '@react-navigation/stack'
 
-const BottomSheetIndex: NavigationStackScreenComponent = ({ navigation }) => {
+const BottomSheetIndex: React.FC<StackScreenProps<RootStackParamList, 'BottomSheetIndex'>> = ({ navigation }) => {
 
     return (
         <View>

@@ -1,7 +1,11 @@
 export * from './utils'
 export * from './types'
 
-export { default as SmartRefreshLayout } from './components/SmartRefreshLayout'
+export { default as Provider, defaultTheme as DefaultTheme } from './core/Provider'
+
+export { default as ScaleSize } from './styles/scaleSize'
+
+export { SmartRefreshLayout, SmartRefreshLayoutWithoutTheme } from './components/SmartRefreshLayout'
 export { default as BezierRadarHeader } from './components/SmartRefreshLayout/BezierRadarHeader'
 export { default as ClassicsFooter } from './components/SmartRefreshLayout/ClassicsFooter'
 export { default as ClassicsHeader } from './components/SmartRefreshLayout/ClassicsHeader'
@@ -14,7 +18,7 @@ export { ListEmptyHint, ErrorHint, NoDataProps, NoData } from './components/List
 export { default as Portal } from './components/Portal'
 export { default as BottomSheetBehavior } from './components/Sheet/BottomSheetBehavior'
 export { default as StickyItem, StickyItemProps } from './components/Sticky/StickyItem'
-export { default as Provider } from './components/Provider/Provider'
+
 export { default as Modal } from './components/Modal'
 export { default as Toast } from './components/Toast'
 export { default as Touchable, TouchableProps } from './components/Touchable/Touchable'

@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { SmartRefreshLayout, } from '@zero-d/rn-components'
-import type { NavigationStackScreenProps, NavigationStackOptions } from 'react-navigation-stack'
+import { SmartRefreshLayout, SmartRefreshLayoutWithoutTheme } from '@zero-d/rn-components'
+import type { StackScreenProps } from '@react-navigation/stack'
 
-type Props = NavigationStackScreenProps & {
+type Props = StackScreenProps<RootStackParamList, 'RefreshList'> & {
 
 }
 
 type RefreshListState = {
     data: number[]
 }
-
 class RefreshList extends Component<Props, RefreshListState> {
 
     // static navigationOptions: NavigationStackOptions = {
     //     headerShown: false
     // };
 
-    private refreshList = React.createRef<SmartRefreshLayout>();
-
+    private refreshList = React.createRef<SmartRefreshLayoutWithoutTheme>();
 
     constructor(props: Props) {
         super(props);
@@ -37,7 +35,7 @@ class RefreshList extends Component<Props, RefreshListState> {
             this.setState(preState => ({
                 data: [1, 1, 1, 1]// preState.data.concat()
             }), () => {
-                (this.refreshList.current as SmartRefreshLayout).finishRefresh({ success: true })
+                this.refreshList.current!.finishRefresh({ success: true })
             })
         }, 2000)
     }
@@ -49,9 +47,9 @@ class RefreshList extends Component<Props, RefreshListState> {
                 data: preState.data.concat([1, 1, 1, 1])
             }), () => {
                 if (this.state.data.length > 7) {
-                    (this.refreshList.current as SmartRefreshLayout).finishLoadMoreWithNoMoreData()
+                    this.refreshList.current!.finishLoadMoreWithNoMoreData()
                 } else {
-                    (this.refreshList.current as SmartRefreshLayout).finishLoadMore()
+                    this.refreshList.current!.finishLoadMore()
                 }
 
             })
@@ -65,6 +63,7 @@ class RefreshList extends Component<Props, RefreshListState> {
                 onRefresh={this.onRefresh.bind(this)}
                 onLoadMore={this.onLoadMore.bind(this)}
                 enableAutoLoadMore={false}
+                //@ts-ignore
                 ref={this.refreshList}
                 enableLoadMore
                 primaryColor='#59b8fa'

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { requireNativeComponent, UIManager, findNodeHandle } from 'react-native';
+import { requireNativeComponent, UIManager, findNodeHandle, NativeSyntheticEvent } from 'react-native';
 import type { TwoLevelHeaderProps } from './types'
 import { getViewManagerConfig } from '../../utils/nativeComponentUtils'
-import type { BaseNativeEvent } from '../../constants/interface'
 
 const VIEW_MANAGER_NAME: string = 'RNTwoLevelHeaderManager';
 
@@ -10,7 +9,10 @@ const VIEW_MANAGER_NAME: string = 'RNTwoLevelHeaderManager';
 //     OnTwoLevel = 8
 // }
 
-export interface TwoLevelHeaderNativeEvent extends BaseNativeEvent { }
+export interface TwoLevelHeaderNativeEvent extends NativeSyntheticEvent<{
+    type: number | string,
+    event?: any
+}> { }
 
 class TwoLevelHeader extends Component<TwoLevelHeaderProps> {
 

@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Image } from 'react-native';
 import { SmartRefreshLayout, Text, Modal, Touchable } from '@zero-d/rn-components'
-import type { NavigationStackScreenProps } from 'react-navigation-stack'
+import type { StackScreenProps } from '@react-navigation/stack'
 // import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import { TouchableNativeFeedback } from 'react-native-gesture-handler'
-export interface HomeProps extends NavigationStackScreenProps {
+import Test, { Test as OTest, TestProps } from '../RefreshList/Test'
+
+export interface HomeProps extends StackScreenProps<RootStackParamList, 'Home'> {
 }
 
 export interface HomeState {
@@ -12,20 +14,21 @@ export interface HomeState {
 
 const List = [
     {
-        router: 'RefreshLayoutIndex',
+        router: 'RefreshLayoutIndex' as keyof RootStackParamList,
         name: 'go to RefreshLayoutIndex'
     },
     {
-        router: 'StickyItem',
+        router: 'StickyItem' as keyof RootStackParamList,
         name: 'go to StickyItem'
     },
     {
-        router: 'BottomSheetIndex',
+        router: 'BottomSheetIndex' as keyof RootStackParamList,
         name: 'go to BottomSheet'
     }
 ]
 
 class Home extends React.Component<HomeProps, HomeState> {
+    testRef = React.createRef<OTest>()
     constructor(props: HomeProps) {
         super(props);
         this.state = {
@@ -36,6 +39,7 @@ class Home extends React.Component<HomeProps, HomeState> {
         // AliyunOSS.addEventListener('downloadProgress',function(e){
         //     e.currentSize
         // })
+        this.testRef.current!.show()
     }
 
     click() {
@@ -55,6 +59,7 @@ class Home extends React.Component<HomeProps, HomeState> {
         console.log('styles', styles);
         return (
             <View style={{ flex: 1, backgroundColor: '#fff', }}>
+                <Test ref={this.testRef} He='333' />
                 <FlatList
                     refreshControl={<SmartRefreshLayout
                         HeaderComponent={() => <SmartRefreshLayout.BezierRadarHeader />}

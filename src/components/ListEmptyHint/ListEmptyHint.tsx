@@ -1,21 +1,30 @@
-import React from 'react'
-import { View, ActivityIndicator, Image, StyleSheet, StyleProp, ViewStyle, ImageSourcePropType } from 'react-native'
+import React, { FC } from 'react'
+import { View, ActivityIndicator, Image, StyleSheet, StyleProp, ViewStyle, ImageSourcePropType, TextProps } from 'react-native'
 import Text from '../CustomText/CustomText'
-import { setSize, setSizeText } from '../../utils/common'
 
 const icons = {
     noData: require('../../img/component/bg-noData.png')
 }
 
-export const ListEmptyHint = () => (
-    <View style={{ flexDirection: 'row', marginTop: setSize(80), justifyContent: 'center', }}>
+type ListEmptyHintProps = {
+    style?: StyleProp<ViewStyle>
+    textStyle?: StyleProp<TextProps>
+}
+
+export const ListEmptyHint: FC<ListEmptyHintProps> = ({ style, textStyle }) => (
+    <View style={[{ flexDirection: 'row', marginTop: 40, justifyContent: 'center', }, style]}>
         <ActivityIndicator size="small" color="#888888" />
-        <Text style={{ textAlign: 'center', marginLeft: setSize(10), }}>数据加载中......</Text>
+        <Text style={[{ textAlign: 'center', marginLeft: 10, }, textStyle]}>数据加载中......</Text>
     </View>
 )
 
-export const ErrorHint = ({ onPress }: { onPress?: () => void }) => (
-    <Text onPress={onPress} style={{ textAlign: 'center', marginLeft: setSize(10), marginTop: setSize(100) }}>出错了，请点击重新加载</Text>
+type ErrorHintProps = {
+    style?: StyleProp<ViewStyle>
+    onPress?: () => void
+}
+
+export const ErrorHint: FC<ErrorHintProps> = ({ onPress, style }) => (
+    <Text onPress={onPress} style={[{ textAlign: 'center', marginLeft: 10, marginTop: 50 }, style]}>出错了，请点击重新加载</Text>
 )
 
 export type NoDataProps = {
@@ -34,15 +43,15 @@ export const NoData = ({ text = '没有查找到你要的数据', style, bgImg =
 const styles = StyleSheet.create({
     noData: {
         alignItems: 'center',
-        marginTop: setSize(370)
+        marginTop: 180
     },
     noDataImg: {
-        width: setSize(242),
-        height: setSize(160),
-        marginBottom: setSize(30),
+        width: 180,
+        height: 120,
+        marginBottom: 20,
     },
     noDataText: {
-        fontSize: setSizeText(26),
+        fontSize: 16,
         color: '#999'
     }
 })

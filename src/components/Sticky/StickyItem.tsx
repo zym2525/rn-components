@@ -47,7 +47,7 @@ const StickyItem = (props: StickyItemProps) => {
                     { zIndex: 9999, transform: [{ translateY }] }
                 ] as any}
         >
-            { children}
+            {children}
 
         </Animated.View>
     )

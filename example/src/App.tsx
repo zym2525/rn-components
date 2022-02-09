@@ -1,17 +1,18 @@
 import * as React from 'react';
 
 // import { StyleSheet, View, Text } from 'react-native';
-import { AppNavigator } from './routers/appNavigator'
-import { Provider as PaperProvider } from 'react-native-paper';
+import AppNavigator from './routers/appNavigator'
 import { Provider as ZeroProvider } from '@zero-d/rn-components'
+import { CombinedDefaultTheme } from './style/theme'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   return (
-    <PaperProvider>
-      <ZeroProvider>
+    <ZeroProvider theme={CombinedDefaultTheme}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <AppNavigator />
-      </ZeroProvider>
-    </PaperProvider>
+      </GestureHandlerRootView>
+    </ZeroProvider>
   );
 }
 

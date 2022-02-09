@@ -1,14 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import type { NavigationStackScreenComponent } from 'react-navigation-stack'
+import type { StackScreenProps } from '@react-navigation/stack'
 
-const RefreshLayoutIndex: NavigationStackScreenComponent = ({ navigation }) => {
+const RefreshLayoutIndex: React.FC<StackScreenProps<RootStackParamList, 'RefreshLayoutIndex'>> = ({ navigation }) => {
 
     return (
         <View>
             <Text style={styles.listItem} onPress={() => navigation.navigate('RefreshList')}>RefreshList</Text>
             <Text style={styles.listItem} onPress={() => navigation.navigate('TwoLevelDemo')}>TwoLevelDemo</Text>
             <Text style={styles.listItem} onPress={() => navigation.navigate('PureScrollMode')}>纯滚动模式</Text>
+            <Text style={styles.listItem} onPress={() => navigation.navigate('LoadingLayout')}>LoadingLayout</Text>
         </View>
     )
 }

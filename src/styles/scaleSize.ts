@@ -1,5 +1,5 @@
 import { Dimensions, PixelRatio } from 'react-native';
-import Orientation from '../orientation';
+import Orientation from '../utils/orientation';
 
 const initial = Orientation.getInitialOrientation();
 
@@ -8,7 +8,7 @@ export const deviceWidth = Dimensions.get('window').width;
 const fontScale = PixelRatio.getFontScale(); //返回字体大小缩放比例
 export const pixelRatio = PixelRatio.get() //当前设备的像素密度
 
-type ScaleSizeProps = {
+export type ScaleSizeProps = {
     /**
      * 
      * @param portraitWidth 设计稿竖直长度 纵向app是用

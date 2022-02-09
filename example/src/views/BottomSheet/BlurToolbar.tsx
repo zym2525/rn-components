@@ -2,17 +2,11 @@ import React from 'react'
 import { Image, StyleSheet, Text, View, Dimensions, StatusBar } from 'react-native'
 import { BottomSheetBehavior as BottomSheet } from '@zero-d/rn-components'
 import Animated, { debug, interpolate, Extrapolate, max, multiply, add } from 'react-native-reanimated'
-import type { NavigationStackScreenProps, NavigationStackOptions } from 'react-navigation-stack'
+import type { StackScreenProps } from '@react-navigation/stack'
 
-type Props = NavigationStackScreenProps & {
-
-}
+type Props = StackScreenProps<RootStackParamList, 'BlurToolbar'>
 
 export default class Example extends React.Component<Props> {
-
-    static navigationOptions = ({ navigation }: NavigationStackScreenProps): NavigationStackOptions => ({
-        headerShown: false
-    });
 
     constructor(props: Props) {
         super(props);
