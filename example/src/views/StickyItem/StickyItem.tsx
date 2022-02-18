@@ -59,7 +59,7 @@ class StickyDemo extends Component<Props, State> {
                 </View>
 
                 <StickyItem
-                    stickyHeaderY={this.state.headHeight} // 把头部高度传入
+                    // stickyHeaderY={this.state.headHeight} // 把头部高度传入
                     stickyScrollY={this.state.scrollY}    // 把滑动距离传入
                 >
                     {/* // 里面放入第二部分组件 */}

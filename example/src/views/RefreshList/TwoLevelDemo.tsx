@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, FlatList, StyleSheet, Dimensions, StatusBar, } from 'react-native';
 import { SmartRefreshLayout, TwoLevelHeader, ClassicsHeader, SmartRefreshLayoutOnHeaderMovingEvent, SmartRefreshLayoutStateChangedEvent, Text } from '@zero-d/rn-components'
-import Animated, { debug, Value, clockRunning, startClock, timing, set, cond, Clock, event, sub, min, Easing, block, stopClock, divide, add, max } from 'react-native-reanimated'
+import Animated, { debug, Value, clockRunning, startClock, timing, set, cond, Clock, event, sub, min, EasingNode, block, stopClock, divide, add, max } from 'react-native-reanimated'
 import { px2dp } from '../../utils';
 import type { StackScreenProps } from '@react-navigation/stack'
 
@@ -22,7 +22,7 @@ function runTiming(clock: Animated.Clock, value: Animated.Node<number>, dest: An
     const config = {
         duration: duration,
         toValue: new Value(0),
-        easing: Easing.inOut(Easing.ease),
+        easing: EasingNode.inOut(EasingNode.ease),
     };
 
     return block([
@@ -133,7 +133,7 @@ class TwoLevelDemo extends Component<Props, State> {
         screenHeight = screenHeight - (StatusBar.currentHeight as number);
         return (
             <View style={{ flex: 1 }}>
-                <Animated.View style={[styles.title, { opacity: sub(1, min(this.headerPercent, 1)) }]}>
+                {/* <Animated.View style={[styles.title, { opacity: sub(1, min(this.headerPercent, 1)) }]}>
                     <Text style={styles.arrow} onPress={() => this.props.navigation.goBack()}>&#xe606;</Text>
                     <Animated.Text
                         style={[
@@ -144,7 +144,7 @@ class TwoLevelDemo extends Component<Props, State> {
                             }
                         ]}
                     >this is header</Animated.Text>
-                </Animated.View>
+                </Animated.View> */}
                 <SmartRefreshLayout
                     style={{ flex: 1, }}
                     onRefresh={this.onRefresh.bind(this)}
@@ -172,10 +172,7 @@ class TwoLevelDemo extends Component<Props, State> {
                             />
 
                         </View>
-                        <Animated.View style={{ height: 800, opacity: this.twoLevelContentOpacity }}>
-                            {/* <Image style={{ width: Dimensions.get('screen').width, height: Dimensions.get('screen').height, zIndex: -1, position: 'absolute' }} source={require('@/img/demo/image_second_floor.jpg')}>
-
-                            </Image> */}
+                        {/* <Animated.View style={{ height: 800, opacity: this.twoLevelContentOpacity }}>
                             <Text style={styles.twoText}>我</Text>
                             <Text style={styles.twoText}>突</Text>
                             <Text style={styles.twoText}>然</Text>
@@ -184,7 +181,7 @@ class TwoLevelDemo extends Component<Props, State> {
                             <Text style={styles.twoText}>出</Text>
                             <Text style={styles.twoText}>来</Text>
                             <Text style={styles.twoText}>了</Text>
-                        </Animated.View>
+                        </Animated.View> */}
                         <ClassicsHeader accentColor='#ffffff' spinnerStyle={ClassicsHeader.SpinnerStyle.Translate} primaryColor='#59b8fa' />
 
                     </TwoLevelHeader>}

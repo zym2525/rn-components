@@ -10,14 +10,15 @@
     "bundle": "React-native bundle --platform android --dev false --entry-file index.tsx --bundle-output android/app/src/main/assets/index.android.bundle"
   },
   "dependencies": {
+    "@react-native-community/picker": "^1.8.1",
     "@react-native-masked-view/masked-view": "^0.2.6",
     "@react-navigation/native": "^6.0.6",
-    "@react-navigation/stack": "^6.0.11",
+    "@react-navigation/stack": "^6.1.1",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-paper": "^4.11.2",
-    "react-native-reanimated": "1.8.0",
+    "react-native-reanimated": "^2.4.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.2",
     "react-native-vector-icons": "^9.0.0"

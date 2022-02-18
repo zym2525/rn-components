@@ -16,7 +16,6 @@ export { default as DragLayout, DragLayoutProps } from './components/Drag/DragLa
 export { default as LoadingLayout, LoadingLayoutProps } from './components/Layout/LoadingLayout'
 export { ListEmptyHint, ErrorHint, NoDataProps, NoData } from './components/ListEmptyHint/ListEmptyHint'
 export { default as Portal } from './components/Portal'
-export { default as BottomSheetBehavior } from './components/Sheet/BottomSheetBehavior'
 export { default as StickyItem, StickyItemProps } from './components/Sticky/StickyItem'
 
 export { default as Modal } from './components/Modal'

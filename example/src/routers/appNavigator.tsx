@@ -13,14 +13,16 @@ import { Appbar } from 'react-native-paper';
 
 import HomeScreen from '../views/Home/Home'
 import StickyScreen from '../views/StickyItem/StickyItem'
-import BottomSheetScreen from '../views/BottomSheet/BottomSheet'
-import BottomSheetIndexScreen from '../views/BottomSheet/index'
-import BlurToolbarScreen from '../views/BottomSheet/BlurToolbar'
+// import BottomSheetScreen from '../views/BottomSheet/BottomSheet'
+// import BottomSheetIndexScreen from '../views/BottomSheet/index'
+// import BlurToolbarScreen from '../views/BottomSheet/BlurToolbar'
 import RefreshListScreen from '../views/RefreshList/RefreshList'
 import RefreshLayoutIndexScreen from '../views/RefreshList/index'
 import LoadingLayoutScreen from '../views/RefreshList/LoadingLayout'
 import TwoLevelDemoScreen from '../views/RefreshList/TwoLevelDemo'
 import PureScrollModeScreen from '../views/RefreshList/PureScrollMode'
+import DraggableScreen from '../views/Draggable/Draggable'
+import { WaterfallGridExample as WaterfallGridScreen } from '../views/Draggable/WaterfallGridExample'
 
 function CustomNavigationBar({ navigation, back, options, route }: StackHeaderProps) {
 
@@ -48,9 +50,11 @@ declare global {
         TwoLevelDemo: undefined;
         PureScrollMode: undefined;
         StickyItem: undefined;
-        BottomSheetIndex: undefined;
-        BottomSheet: undefined;
-        BlurToolbar: undefined;
+        // BottomSheetIndex: undefined;
+        // BottomSheet: undefined;
+        // BlurToolbar: undefined;
+        Draggable: undefined;
+        WaterfallGrid: undefined;
     };
 }
 
@@ -76,9 +80,11 @@ export default function App() {
                     <Stack.Screen name="TwoLevelDemo" component={TwoLevelDemoScreen} />
                     <Stack.Screen name="PureScrollMode" component={PureScrollModeScreen} />
                     <Stack.Screen name="StickyItem" component={StickyScreen} />
-                    <Stack.Screen name="BottomSheetIndex" component={BottomSheetIndexScreen} />
-                    <Stack.Screen name="BottomSheet" component={BottomSheetScreen} />
-                    <Stack.Screen name="BlurToolbar" component={BlurToolbarScreen} options={{ headerShown: false }} />
+                    {/* <Stack.Screen name="BottomSheetIndex" component={BottomSheetIndexScreen} /> */}
+                    {/* <Stack.Screen name="BottomSheet" component={BottomSheetScreen} /> */}
+                    {/* <Stack.Screen name="BlurToolbar" component={BlurToolbarScreen} options={{ headerShown: false }} /> */}
+                    <Stack.Screen name="Draggable" component={DraggableScreen} />
+                    <Stack.Screen name="WaterfallGrid" component={WaterfallGridScreen} />
                 </Stack.Group>
             </Stack.Navigator>
         </NavigationContainer>

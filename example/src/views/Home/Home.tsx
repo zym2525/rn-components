@@ -21,10 +21,18 @@ const List = [
         router: 'StickyItem' as keyof RootStackParamList,
         name: 'go to StickyItem'
     },
+    // {
+    //     router: 'BottomSheetIndex' as keyof RootStackParamList,
+    //     name: 'go to BottomSheet'
+    // }
     {
-        router: 'BottomSheetIndex' as keyof RootStackParamList,
-        name: 'go to BottomSheet'
-    }
+        router: 'Draggable' as keyof RootStackParamList,
+        name: 'go to Draggable'
+    },
+    {
+        router: 'WaterfallGrid' as keyof RootStackParamList,
+        name: 'go to WaterfallGrid'
+    },
 ]
 
 class Home extends React.Component<HomeProps, HomeState> {
