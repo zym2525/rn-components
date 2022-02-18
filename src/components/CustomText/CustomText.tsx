@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Text as RNText, TextStyle, TextProps, StyleProp } from 'react-native'
+import { Text as RNText, TextStyle, StyleProp } from 'react-native'
 import { withTheme } from 'react-native-paper'
 
 const myStyle: TextStyle = {

@@ -1,4 +1,4 @@
-import React, { ReactNode, FC } from 'react'
+import React, { FC } from 'react'
 import { GestureDetector, Gesture, GestureStateChangeEvent, PanGestureHandlerEventPayload } from 'react-native-gesture-handler'
 import Animated, { useSharedValue, useAnimatedStyle, } from 'react-native-reanimated'
 import type { ViewStyle, StyleProp } from 'react-native'
@@ -51,9 +51,23 @@ const DragLayout: FC<DragLayoutProps> = ({ children, initialOffsetX = 0, initial
             onBegin?.(event)
         })
         .onUpdate((e) => {
+            let x = e.translationX + start.value.x;
+            let y = e.translationX + start.value.y;
+            if (minOffsetX != undefined) {
+                x = Math.max(minOffsetX, x);
+            }
+            if (maxOffsetX != undefined) {
+                x = Math.min(maxOffsetX, x);
+            }
+            if (minOffsetY != undefined) {
+                y = Math.max(minOffsetY, y);
+            }
+            if (maxOffsetY != undefined) {
+                y = Math.min(maxOffsetY, y);
+            }
             offset.value = {
-                x: e.translationX + start.value.x,
-                y: e.translationY + start.value.y,
+                x: x,
+                y: y,
             };
         })
         .onEnd(() => {
