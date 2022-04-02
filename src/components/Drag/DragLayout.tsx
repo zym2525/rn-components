@@ -52,7 +52,7 @@ const DragLayout: FC<DragLayoutProps> = ({ children, initialOffsetX = 0, initial
         })
         .onUpdate((e) => {
             let x = e.translationX + start.value.x;
-            let y = e.translationX + start.value.y;
+            let y = e.translationY + start.value.y;
             if (minOffsetX != undefined) {
                 x = Math.max(minOffsetX, x);
             }

@@ -22,7 +22,7 @@ const VIEW_MANAGER_NAME: string = 'RNSmartRefreshLayout';
 type State = {
     refreshState: RefreshState
 }
-export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
+export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps & { ref?: React.RefObject<SmartRefreshLayout> }, State> {
 
     static RefreshState = RefreshState;
     static ClassicsFooter = ClassicsFooter;
@@ -256,7 +256,7 @@ export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State
     }
 
     render() {
-        let { children, style, accentColor: customAccentColor, primaryColor: customPrimaryColor, theme, ...rest } = this.props;
+        let { children, style, accentColor: customAccentColor, primaryColor: customPrimaryColor, theme, ref, ...rest } = this.props;
         const accentColor = customAccentColor || Colors.white;
         const primaryColor = customPrimaryColor || theme.colors.primary;
         return (

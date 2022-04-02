@@ -63,7 +63,6 @@ class RefreshList extends Component<Props, RefreshListState> {
                 onRefresh={this.onRefresh.bind(this)}
                 onLoadMore={this.onLoadMore.bind(this)}
                 enableAutoLoadMore={false}
-                //@ts-ignore
                 ref={this.refreshList}
                 enableLoadMore
                 primaryColor='#59b8fa'
