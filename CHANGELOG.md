@@ -1,3 +1,5 @@
+## [1.0.1](https://github.com/zym2525/rn-components/compare/v1.0.0...v1.0.1) (2022-04-02)
+
 # [1.0.0](https://github.com/zym2525/rn-components/compare/v0.0.15...v1.0.0) (2022-02-18)
 
 
