@@ -22,7 +22,7 @@ const VIEW_MANAGER_NAME: string = 'RNSmartRefreshLayout';
 type State = {
     refreshState: RefreshState
 }
-export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps & { ref?: React.RefObject<SmartRefreshLayout> }, State> {
+export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps & { ref?: React.RefObject<SmartRefreshLayout> | React.MutableRefObject<SmartRefreshLayout | undefined> }, State> {
 
     static RefreshState = RefreshState;
     static ClassicsFooter = ClassicsFooter;
