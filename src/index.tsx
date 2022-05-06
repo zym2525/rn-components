@@ -17,6 +17,10 @@ export { default as LoadingLayout, LoadingLayoutProps } from './components/Layou
 export { ListEmptyHint, ErrorHint, NoDataProps, NoData } from './components/ListEmptyHint/ListEmptyHint'
 export { default as Portal } from './components/Portal'
 export { default as StickyItem, StickyItemProps } from './components/Sticky/StickyItem'
+export { default as IconButton } from './components/Button/IconButton'
+export { default as CrossFadeIcon } from './components/Icon/CrossFadeIcon'
+export { default as Icon, IconSource } from './components/Icon/Icon'
+export { default as MaterialCommunityIcon } from './components/Icon/MaterialCommunityIcon'
 
 export { default as Modal } from './components/Modal'
 export { default as Toast } from './components/Toast'

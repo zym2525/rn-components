@@ -22,7 +22,7 @@ const VIEW_MANAGER_NAME: string = 'RNSmartRefreshLayout';
 type State = {
     refreshState: RefreshState
 }
-export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps & { ref?: React.RefObject<SmartRefreshLayout> | React.MutableRefObject<SmartRefreshLayout | undefined> }, State> {
+export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps, State> {
 
     static RefreshState = RefreshState;
     static ClassicsFooter = ClassicsFooter;
@@ -214,11 +214,11 @@ export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps & { re
      * @description 设置更多数据状态
      * @param {boolean} delayed 延迟毫秒
      */
-    setNoMoreData(hasMoreData = false) {
+    setNoMoreData(noMoreData = false) {
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(this),
             getViewManagerConfig(VIEW_MANAGER_NAME).Commands.setNoMoreData,
-            [hasMoreData],
+            [noMoreData],
         );
     }
 
@@ -234,7 +234,6 @@ export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps & { re
         } else {
             const accentColor = customAccentColor || Colors.white;
             const primaryColor = customPrimaryColor || theme.colors.primary;
-            console.log('primaryColor: ', primaryColor);
             return <ClassicsHeader accentColor={accentColor} primaryColor={primaryColor} spinnerStyle={ClassicsHeader.SpinnerStyle.Translate} /> //<View collapsable={false}></View>
         }
     }
@@ -256,7 +255,7 @@ export class SmartRefreshLayout extends Component<SmartRefreshLayoutProps & { re
     }
 
     render() {
-        let { children, style, accentColor: customAccentColor, primaryColor: customPrimaryColor, theme, ref, ...rest } = this.props;
+        let { children, style, accentColor: customAccentColor, primaryColor: customPrimaryColor, theme, ...rest } = this.props;
         const accentColor = customAccentColor || Colors.white;
         const primaryColor = customPrimaryColor || theme.colors.primary;
         return (
