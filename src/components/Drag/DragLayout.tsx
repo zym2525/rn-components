@@ -1,92 +1,92 @@
-import React, { FC } from 'react'
-import { GestureDetector, Gesture, GestureStateChangeEvent, PanGestureHandlerEventPayload } from 'react-native-gesture-handler'
-import Animated, { useSharedValue, useAnimatedStyle, } from 'react-native-reanimated'
-import type { ViewStyle, StyleProp } from 'react-native'
+// import React, { FC } from 'react'
+// import { GestureDetector, Gesture, GestureStateChangeEvent, PanGestureHandlerEventPayload } from 'react-native-gesture-handler'
+// import Animated, { useSharedValue, useAnimatedStyle, } from 'react-native-reanimated'
+// import type { ViewStyle, StyleProp } from 'react-native'
 
-export type DragLayoutProps = {
-    style?: StyleProp<Animated.AnimateStyle<ViewStyle>>,
-    /**
-     * 初始X偏移量
-     */
-    initialOffsetX?: number
-    /**
-     * 初始Y偏移量
-     */
-    initialOffsetY?: number
-    /**
-     * 最小X偏移量
-     */
-    minOffsetX?: number
-    /**
-    * 最大X偏移量
-    */
-    maxOffsetX?: number
-    /**
-    * 最小Y偏移量
-    */
-    minOffsetY?: number
-    /**
-     * 最大Y偏移量
-     */
-    maxOffsetY?: number
+// export type DragLayoutProps = {
+//     style?: StyleProp<Animated.AnimateStyle<ViewStyle>>,
+//     /**
+//      * 初始X偏移量
+//      */
+//     initialOffsetX?: number
+//     /**
+//      * 初始Y偏移量
+//      */
+//     initialOffsetY?: number
+//     /**
+//      * 最小X偏移量
+//      */
+//     minOffsetX?: number
+//     /**
+//     * 最大X偏移量
+//     */
+//     maxOffsetX?: number
+//     /**
+//     * 最小Y偏移量
+//     */
+//     minOffsetY?: number
+//     /**
+//      * 最大Y偏移量
+//      */
+//     maxOffsetY?: number
 
-    onBegin?: (event: GestureStateChangeEvent<PanGestureHandlerEventPayload>) => void
-    onFinalize?: (event: GestureStateChangeEvent<PanGestureHandlerEventPayload>, success: boolean) => void
-}
+//     onBegin?: (event: GestureStateChangeEvent<PanGestureHandlerEventPayload>) => void
+//     onFinalize?: (event: GestureStateChangeEvent<PanGestureHandlerEventPayload>, success: boolean) => void
+// }
 
-const DragLayout: FC<DragLayoutProps> = ({ children, initialOffsetX = 0, initialOffsetY = 0, minOffsetX, maxOffsetX, minOffsetY, maxOffsetY, style, onBegin, onFinalize }) => {
+// const DragLayout: FC<DragLayoutProps> = ({ children, initialOffsetX = 0, initialOffsetY = 0, minOffsetX, maxOffsetX, minOffsetY, maxOffsetY, style, onBegin, onFinalize }) => {
 
-    const offset = useSharedValue({ x: initialOffsetX, y: initialOffsetY });
-    const animatedStyles = useAnimatedStyle(() => {
-        return {
-            transform: [
-                { translateX: offset.value.x },
-                { translateY: offset.value.y },
-            ],
-        };
-    });
-    const start = useSharedValue({ x: 0, y: 0 });
-    const dragGesture = Gesture.Pan()
-        .onBegin((event) => {
-            onBegin?.(event)
-        })
-        .onUpdate((e) => {
-            let x = e.translationX + start.value.x;
-            let y = e.translationY + start.value.y;
-            if (minOffsetX != undefined) {
-                x = Math.max(minOffsetX, x);
-            }
-            if (maxOffsetX != undefined) {
-                x = Math.min(maxOffsetX, x);
-            }
-            if (minOffsetY != undefined) {
-                y = Math.max(minOffsetY, y);
-            }
-            if (maxOffsetY != undefined) {
-                y = Math.min(maxOffsetY, y);
-            }
-            offset.value = {
-                x: x,
-                y: y,
-            };
-        })
-        .onEnd(() => {
-            start.value = {
-                x: offset.value.x,
-                y: offset.value.y,
-            };
-        })
-        .onFinalize((event, success) => {
-            onFinalize?.(event, success)
-        });
+//     const offset = useSharedValue({ x: initialOffsetX, y: initialOffsetY });
+//     const animatedStyles = useAnimatedStyle(() => {
+//         return {
+//             transform: [
+//                 { translateX: offset.value.x },
+//                 { translateY: offset.value.y },
+//             ],
+//         };
+//     });
+//     const start = useSharedValue({ x: 0, y: 0 });
+//     const dragGesture = Gesture.Pan()
+//         .onBegin((event) => {
+//             onBegin?.(event)
+//         })
+//         .onUpdate((e) => {
+//             let x = e.translationX + start.value.x;
+//             let y = e.translationY + start.value.y;
+//             if (minOffsetX != undefined) {
+//                 x = Math.max(minOffsetX, x);
+//             }
+//             if (maxOffsetX != undefined) {
+//                 x = Math.min(maxOffsetX, x);
+//             }
+//             if (minOffsetY != undefined) {
+//                 y = Math.max(minOffsetY, y);
+//             }
+//             if (maxOffsetY != undefined) {
+//                 y = Math.min(maxOffsetY, y);
+//             }
+//             offset.value = {
+//                 x: x,
+//                 y: y,
+//             };
+//         })
+//         .onEnd(() => {
+//             start.value = {
+//                 x: offset.value.x,
+//                 y: offset.value.y,
+//             };
+//         })
+//         .onFinalize((event, success) => {
+//             onFinalize?.(event, success)
+//         });
 
-    return (
-        <GestureDetector gesture={dragGesture}>
-            <Animated.View style={[animatedStyles, style]} >{children}</Animated.View>
-        </GestureDetector>
-    )
-}
+//     return (
+//         <GestureDetector gesture={dragGesture}>
+//             <Animated.View style={[animatedStyles, style]} >{children}</Animated.View>
+//         </GestureDetector>
+//     )
+// }
 
-export default DragLayout
+// export default DragLayout
 
 

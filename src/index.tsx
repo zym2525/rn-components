@@ -12,11 +12,11 @@ export { default as ClassicsHeader } from './components/SmartRefreshLayout/Class
 export { default as TwoLevelHeader } from './components/SmartRefreshLayout/TwoLevelHeader'
 
 export { default as Text } from './components/CustomText/CustomText'
-export { default as DragLayout, DragLayoutProps } from './components/Drag/DragLayout'
+// export { default as DragLayout, DragLayoutProps } from './components/Drag/DragLayout'
 export { default as LoadingLayout, LoadingLayoutProps } from './components/Layout/LoadingLayout'
 export { ListEmptyHint, ErrorHint, NoDataProps, NoData } from './components/ListEmptyHint/ListEmptyHint'
 export { default as Portal } from './components/Portal'
-export { default as StickyItem, StickyItemProps } from './components/Sticky/StickyItem'
+// export { default as StickyItem, StickyItemProps } from './components/Sticky/StickyItem'
 export { default as IconButton } from './components/Button/IconButton'
 export { default as CrossFadeIcon } from './components/Icon/CrossFadeIcon'
 export { default as Icon, IconSource } from './components/Icon/Icon'

@@ -4,6 +4,6 @@ module.exports = {
     [
       "lodash"
     ],
-    'react-native-reanimated/plugin',
+    // 'react-native-reanimated/plugin',
   ]
 };

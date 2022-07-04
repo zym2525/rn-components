@@ -12,7 +12,7 @@ type Props = {
     /**
      * Color of the icon.
      */
-    color: string;
+    color?: string;
     /**
      * Size of the icon.
      */

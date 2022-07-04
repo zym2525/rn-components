@@ -11,7 +11,7 @@ import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper';
 //         }
 //     }
 // }
-console.log('process:', process);
+
 export const defaultTheme: ReactNativePaper.Theme = {
     ...DefaultTheme,
     colors: {
